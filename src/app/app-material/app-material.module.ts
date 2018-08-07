@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import {
   MatToolbarModule, MatButtonModule,
   MatSidenavModule, MatIconModule, MatListModule,
-  MatCheckboxModule, MatSnackBarModule
+  MatCheckboxModule, MatSnackBarModule, MatDialogModule,
+  MatFormFieldModule, MatInputModule
 } from '@angular/material';
 
 @NgModule({
@@ -16,6 +17,9 @@ import {
     MatListModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     MatToolbarModule,
@@ -25,6 +29,9 @@ import {
     MatListModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   declarations: []
 })

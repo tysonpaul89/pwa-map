@@ -1,0 +1,43 @@
+<div class="example-container">
+    <h5>Personal Marker</h5>
+    <form>
+          <input type="hidden" name="id" [(ngModel)]="data.id">
+          <input type="hidden" name="action" [(ngModel)]="data.action">
+          <mat-form-field>
+            <input matInput placeholder="Marker name" [(ngModel)]="data.name" name="name">
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea matInput placeholder="Marker note" [(ngModel)]="data.note" name="note"></textarea>
+          </mat-form-field>
+
+          <mat-dialog-actions>
+              <button
+              mat-stroked-button
+              color="primary"
+              [mat-dialog-close]="data"
+              >Save</button>
+              &nbsp;
+              <div *ngIf="data.id !== null">
+                  <button
+                  mat-stroked-button
+                  [mat-dialog-close]="{
+                    id: data.id,
+                    action: 'delete',
+                    name: data.name,
+                    note: data.note,
+                    latitude: data.latitude,
+                    longitude: data.longitude
+                  }"
+                  color="primary"
+                  >Delete</button>
+                  &nbsp;
+              </div>
+            <button
+              mat-stroked-button
+              mat-button
+              mat-dialog-close
+              >Close</button>
+          </mat-dialog-actions>
+    </form>
+  </div>

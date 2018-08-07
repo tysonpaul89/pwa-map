@@ -1,7 +1,8 @@
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<agm-map [latitude]="10.024643" [longitude]="76.307861"></agm-map>
-<!-- <agm-map *ngIf="coordinates !== undefined" [latitude]="coordinates.latitude" [longitude]="coordinates.longitude">
+<agm-map *ngIf="coordinates !== undefined"
+  [latitude]="coordinates.latitude"
+  [longitude]="coordinates.longitude"
+  [zoom]="15"
+  >
   <agm-marker *ngFor="let restaurant of nearByRestaurants"
   [latitude]="restaurant.lat"
   [longitude]="restaurant.lng"
@@ -13,4 +14,4 @@
     <a target="__blank" [href]="restaurant.url">View in Zomato</a><br/>
   </agm-info-window>
 </agm-marker>
-</agm-map> -->
+</agm-map>

@@ -33,11 +33,11 @@ export class ZmtService {
    * @param locationData Current location data
    */
   getLocationDetails(locationData) {
-    if (typeof locationData.location_suggestions[0] !== undefined) {
+    if (typeof locationData.location_suggestions[0] !== 'undefined') {
       const entityData = locationData.location_suggestions[0];
 
-      if (typeof entityData.entity_id !== undefined &&
-          typeof entityData.entity_type !== undefined
+      if (typeof entityData.entity_id !== 'undefined' &&
+          typeof entityData.entity_type !== 'undefined'
       ) {
         const httpOptions = {
           headers : new HttpHeaders({

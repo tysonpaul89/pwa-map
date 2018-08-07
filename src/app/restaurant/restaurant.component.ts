@@ -25,11 +25,9 @@ export class RestaurantComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.coordinates);
     this.geoService.getLocation().subscribe(
       (coordinates: Coordinates) => {
         this.coordinates = coordinates;
-        console.log(this.coordinates);
         // Displays restaurants near me from Zomato's API
         this.getNearByRestaurantData();
       },
@@ -63,10 +61,10 @@ export class RestaurantComponent implements OnInit {
         mergeMap(locationData => this.zmtService.getLocationDetails(locationData))
       );
 
-    if (typeof locationDetails !== undefined) {
+    if (typeof locationDetails !== 'undefined') {
       locationDetails.subscribe(
         (locationDetailsData: any) => {
-          if (typeof locationDetailsData.nearby_res !== undefined &&
+          if (typeof locationDetailsData.nearby_res !== 'undefined' &&
             locationDetailsData.nearby_res.length
           ) {
             const restaurantObservables = new Array();
@@ -77,7 +75,7 @@ export class RestaurantComponent implements OnInit {
             forkJoin(restaurantObservables).subscribe(
               (restaurantResponse) => {
                 restaurantResponse.forEach(restaurantData => {
-                  if (typeof restaurantData.id !== undefined) {
+                  if (typeof restaurantData.id !== 'undefined') {
                     this.nearByRestaurants.push({
                       id: +restaurantData.id,
                       name: restaurantData.name,

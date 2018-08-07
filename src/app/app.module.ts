@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MarkerDialogComponent } from './marker-mgmt/marker-dialog/marker-dialog.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     RestaurantComponent,
     MarkerMgmtComponent,
     NavigationComponent,
+    MarkerDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,8 +38,12 @@ import { LayoutModule } from '@angular/cdk/layout';
     }),
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    MarkerDialogComponent
+  ]
 })
 export class AppModule { }

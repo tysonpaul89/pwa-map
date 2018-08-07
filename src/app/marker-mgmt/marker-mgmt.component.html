@@ -1,3 +1,26 @@
-<p>
-  marker-mgmt works!
-</p>
+<agm-map *ngIf="coordinates !== undefined"
+  [latitude]="coordinates.latitude"
+  [longitude]="coordinates.longitude"
+  [zoom]="15"
+  (mapClick)="onMapClick($event)"
+  >
+  <agm-marker *ngIf="coordinates !== undefined"
+    [latitude]="coordinates.latitude"
+    [longitude]="coordinates.longitude"
+    [iconUrl]="{url: '/assets/images/me.png'}"
+    [markerClickable]="true"
+    [markerDraggable]="true"
+    (dragEnd)="onMarkerDragEnd($event)"
+    (markerClick)="onMarkerClick()">
+  </agm-marker>
+  <agm-marker *ngFor="let marker of userMarkers"
+    [latitude]="marker.latitude"
+    [longitude]="marker.longitude"
+    [label]="{text: marker.name, color: '#abd52a'}"
+    [iconUrl]="{url: '/assets/images/placeholder.png'}"
+    [markerDraggable]="true"
+    [markerClickable]="true"
+    (dragEnd)="onUserMarkerDragEnd($event)"
+    (markerClick)="onUserMarkerClick(marker)">
+  </agm-marker>
+</agm-map>
