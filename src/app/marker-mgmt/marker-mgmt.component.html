@@ -20,7 +20,7 @@
     [iconUrl]="{url: '/assets/images/placeholder_1.ico'}"
     [markerDraggable]="true"
     [markerClickable]="true"
-    (dragEnd)="onUserMarkerDragEnd($event)"
+    (dragEnd)="onUserMarkerDragEnd($event, marker)"
     (markerClick)="onUserMarkerClick(marker)">
   </agm-marker>
 </agm-map>

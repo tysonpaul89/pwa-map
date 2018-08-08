@@ -134,8 +134,10 @@ export class MarkerMgmtComponent implements OnInit {
   onUserMarkerDragEnd(event, marker: Marker) {
     if (typeof marker !== 'undefined' && typeof event.coords !== 'undefined') {
       this.selectedMarker = marker;
+      this.selectedMarker.action = 'update';
       this.selectedMarker.latitude = event.coords.lat;
       this.selectedMarker.longitude = event.coords.lng;
+      this.saveMarker(this.selectedMarker);
     }
   }
 
@@ -145,10 +147,10 @@ export class MarkerMgmtComponent implements OnInit {
    * @param  {Marker} marker
    */
   onUserMarkerClick(marker: Marker) {
+    console.log(marker);
     if (typeof marker !== 'undefined') {
-      if (typeof this.selectedMarker === 'undefined') {
-        this.selectedMarker = marker;
-      }
+      this.selectedMarker = marker;
+
       const dialogRef = this.dialog.open(MarkerDialogComponent, {
         data: {
           id: this.selectedMarker.id,
