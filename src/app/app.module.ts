@@ -16,6 +16,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MarkerDialogComponent } from './marker-mgmt/marker-dialog/marker-dialog.component';
+import { QrScannerComponent } from './qr-scanner/qr-scanner.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { MarkerDialogComponent } from './marker-mgmt/marker-dialog/marker-dialog
     MarkerMgmtComponent,
     NavigationComponent,
     MarkerDialogComponent,
+    QrScannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { MarkerDialogComponent } from './marker-mgmt/marker-dialog/marker-dialog
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ZXingScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
