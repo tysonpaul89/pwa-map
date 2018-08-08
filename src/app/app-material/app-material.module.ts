@@ -4,7 +4,7 @@ import {
   MatToolbarModule, MatButtonModule,
   MatSidenavModule, MatIconModule, MatListModule,
   MatCheckboxModule, MatSnackBarModule, MatDialogModule,
-  MatFormFieldModule, MatInputModule
+  MatFormFieldModule, MatInputModule, MatSelectModule,
 } from '@angular/material';
 
 @NgModule({
@@ -20,6 +20,7 @@ import {
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
   ],
   exports: [
     MatToolbarModule,
@@ -32,6 +33,7 @@ import {
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
   ],
   declarations: []
 })

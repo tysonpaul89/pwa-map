@@ -1,5 +1,7 @@
 import { Component, VERSION, OnInit, ViewChild } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import {MatSelectChange, MatDialog, MatSnackBar} from '@angular/material';
+import { QrDialogComponent } from './qr-dialog/qr-dialog.component';
 
 @Component({
   selector: 'app-qr-scanner',
@@ -7,8 +9,6 @@ import { ZXingScannerComponent } from '@zxing/ngx-scanner';
   styleUrls: ['./qr-scanner.component.css']
 })
 export class QrScannerComponent implements OnInit {
-
-  constructor() { }
 
   ngVersion = VERSION.full;
 
@@ -22,26 +22,35 @@ export class QrScannerComponent implements OnInit {
   availableDevices: MediaDeviceInfo[];
   selectedDevice: MediaDeviceInfo;
 
+  constructor(private dialog: MatDialog, public snackBar: MatSnackBar) { }
+
   ngOnInit(): void {
 
       this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
           this.hasCameras = true;
-
-          console.log('Devices: ', devices);
           this.availableDevices = devices;
+          // Select first available device by defult
+          this.selectedDevice = this.availableDevices[0];
 
-          // selects the devices's back camera by default
-          // for (const device of devices) {
-          //     if (/back|rear|environment/gi.test(device.label)) {
-          //         this.scanner.changeDevice(device);
-          //         this.selectedDevice = device;
-          //         break;
-          //     }
-          // }
+          if (!this.hasCameras && this.hasPermission === true) {
+            this.snackBar.open(
+              'Looks like your actual device does not has cameras,' +
+              ' or I could no find\'em.',
+              'Dismiss'
+            );
+          }
+
+          if (this.hasPermission === false) {
+            this.snackBar.open(
+              'You denied the camera permissions,' +
+              '  we can\'t scan anything without it.',
+              'Dismiss'
+            );
+          }
       });
 
       this.scanner.camerasNotFound.subscribe((devices: MediaDeviceInfo[]) => {
-          console.error('An error has occurred when trying to enumerate your video-stream-enabled devices.');
+        this.snackBar.open('Opps! Camera devices not found', 'Dismiss');
       });
 
       this.scanner.permissionResponse.subscribe((answer: boolean) => {
@@ -51,13 +60,20 @@ export class QrScannerComponent implements OnInit {
   }
 
   handleQrCodeResult(resultString: string) {
-      console.log('Result: ', resultString);
+      this.hasCameras = false;
       this.qrResultString = resultString;
+      const dialogRef = this.dialog.open(QrDialogComponent, {
+        width: '250px',
+        data: {resultString: this.qrResultString}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.hasCameras = true;
+      });
   }
 
-  onDeviceSelectChange(selectedValue: string) {
-      console.log('Selection changed: ', selectedValue);
-      this.selectedDevice = this.scanner.getDeviceById(selectedValue);
+  onDeviceSelectChange(changed: MatSelectChange) {
+      this.selectedDevice = this.scanner.getDeviceById(changed.value);
   }
 
 }

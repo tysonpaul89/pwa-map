@@ -1,22 +1,33 @@
 <div *ngIf="availableDevices">
-  <select (change)="onDeviceSelectChange($event.target.value)">
-    <option value="" [selected]="!selectedDevice">No Device</option>
-    <option *ngFor="let device of availableDevices" [value]="device.deviceId" [selected]="selectedDevice && device.deviceId === selectedDevice.deviceId">{{ device.label }}</option>
-  </select>
+    <mat-form-field>
+        <mat-select
+          placeholder="Select a camera"
+          [value]="selectedDevice.deviceId"
+          (selectionChange)="onDeviceSelectChange($event)">
+            <mat-option *ngFor="let device of availableDevices"
+              [value]="device.deviceId"
+              >
+              {{device.label}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 
 <div [hidden]="!hasCameras">
-
   <zxing-scanner #scanner class="test-class" start="true" [device]="selectedDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
+</div>
 
-  <h2 *ngIf="!this.selectedDevice">No camera selected.</h2>
+  <div *ngIf="qrResultString">
+      <h4>Last Detected QR Data:</h4>
+      <h5>{{qrResultString}}</h5>
+  </div>
 
-  <p>
+  <!-- <p>
     Result:
     <strong>{{ qrResultString }}</strong>
-  </p>
+  </p> -->
 
-</div>
+<!-- </div>
 
 <div *ngIf="!hasCameras && hasPermission === true">
 
@@ -38,6 +49,4 @@
 
   <h1>You denied the camera permissions, we can't scan anything without it. 😪</h1>
 
-</div>
-
-<p>Angular version: {{ ngVersion }}</p>
+</div> -->

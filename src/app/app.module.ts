@@ -18,6 +18,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MarkerDialogComponent } from './marker-mgmt/marker-dialog/marker-dialog.component';
 import { QrScannerComponent } from './qr-scanner/qr-scanner.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { QrDialogComponent } from './qr-scanner/qr-dialog/qr-dialog.component';
+import {ClipboardModule} from 'ngx-clipboard';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     NavigationComponent,
     MarkerDialogComponent,
     QrScannerComponent,
+    QrDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,12 +45,14 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    MarkerDialogComponent
+    MarkerDialogComponent,
+    QrDialogComponent
   ]
 })
 export class AppModule { }

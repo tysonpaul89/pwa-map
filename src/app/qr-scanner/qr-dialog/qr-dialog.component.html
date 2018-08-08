@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>QR Data:</h1>
+<div mat-dialog-content>
+  <p>{{data.resultString}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial ngxClipboard [cbContent]="data.resultString" color="primary">Copy</button>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</div>
