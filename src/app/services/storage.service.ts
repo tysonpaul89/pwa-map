@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Marker } from '../models/Marker';
 import {mergeMap} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,11 @@ export class StorageService {
   ) { }
 
   /**
-   * Stores the marker data to the localStorage with unique id as index
+   * Insert/Update the marker data to the localStorage
    * @param  {Marker} marker
-   * @returns {boolean}
-   * @throws Will throw error if marker id is undefined
+   * @returns {Observable}
+   * @throws Error if marker id for new marker is undefined or
+   * if can't find the marker data
    */
   setMarker(marker: Marker) {
     console.log(marker.action, marker);
@@ -31,12 +33,14 @@ export class StorageService {
               markerData.push(marker);
               return this.localStorage.setItem('marker', markerData);
             } else if (marker.action === 'update') {
-              const id = markerData.findIndex(
-                (markerData) => markerData.id === marker.id
+              const markerIndex = markerData.findIndex(
+                (mkr: Marker) => mkr.id === marker.id
               );
 
-              if (typeof markerData[id] !== 'undefined') {
-                markerData[id] = marker;
+              if (typeof markerIndex !== 'undefined' &&
+                  typeof markerData[markerIndex] !== 'undefined'
+              ) {
+                markerData[markerIndex] = marker;
                 return this.localStorage.setItem('marker', markerData);
               } else {
                 throw new Error('Sorry :( Marker is not found');
@@ -49,6 +53,32 @@ export class StorageService {
       throw new Error('Oops! Marker Id is not defined');
     }
   }
+  /**
+   * Deletes marker from localStorage
+   * @param  {string} markerId
+   * @returns {Observable}
+   * @throws Error if can't find the marker data
+   */
+  deleteMarker(markerId: string) {
+    return this.localStorage.getItem('marker').pipe(
+      mergeMap(
+        (markerData: Marker[]) => {
+          const markerIndex = markerData.findIndex(
+            (mkr: Marker) => mkr.id === markerId
+          );
+
+          if (typeof markerIndex !== 'undefined' &&
+              typeof markerData[markerIndex] !== 'undefined'
+          ) {
+            markerData.splice(markerIndex, 1);
+            return this.localStorage.setItem('marker', markerData);
+          } else {
+            throw new Error('Sorry :( Marker is not found');
+          }
+        }
+      )
+    );
+  }
 
   /**
    * Gets the Marker data of the given marker id
@@ -60,6 +90,7 @@ export class StorageService {
   }
 
   getAllMarkers() {
+    // this.localStorage.clearSubscribe();
     return this.localStorage.getItem('marker');
   }
 

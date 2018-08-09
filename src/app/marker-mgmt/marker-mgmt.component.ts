@@ -23,28 +23,44 @@ export class MarkerMgmtComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private storage: StorageService
-  ) { }
+  ) {
+   }
 
   ngOnInit() {
     // Getting location data from Geolocation API
     this.geoService.getLocation().subscribe(
       (coordinates: Coordinates) => {
+        // Gets marker data
+        this.getMarkerData();
+
+        // Sets google map coordinates
         this.coordinates = coordinates;
       },
       (err) => { // Set location manually if there is an error
-          this.coordinates = new Coordinates({
-            latitude: 10.024643,
-            longitude: 76.307861
-          });
+        // Gets marker data
+        this.getMarkerData();
 
-          this.snackBar.open(err, 'Dismiss', {
-            duration: 3000,
-          });
+        // Sets google map coordinates
+        this.coordinates = new Coordinates({
+          latitude: 10.024643,
+          longitude: 76.307861
+        });
+
+        this.snackBar.open(err, 'Dismiss', {
+          duration: 3000,
+        });
       }
     );
+  }
 
+  /**
+   * Gets the marker data
+   */
+  getMarkerData() {
     this.storage.getAllMarkers().subscribe(
-      (markers) => this.userMarkers = markers
+      (markers) => {
+        this.userMarkers = markers;
+      }
     );
   }
 
@@ -92,25 +108,25 @@ export class MarkerMgmtComponent implements OnInit {
 
   /**
    * Marker dialog submit event
-   * @param  {object} form
+   * @param  {object} marker
    */
-  saveMarker(form) {
-    if (typeof form.id !== null && form.action === 'update') {
-      console.log('update', form);
-      // TODO: Update stored data
+  saveMarker(marker) {
+    if (typeof marker.id !== null && marker.action === 'update') {
+      this.storage.setMarker(marker).subscribe(() => {
+        // Updates marker data
+        this.getMarkerData();
+      });
     } else {
       this.storage.setMarker({
         id: this.storage.guid(),
-        name: form.name,
-        note: form.note,
+        action: marker.action,
+        name: marker.name,
+        note: marker.note,
         latitude: this.coordinates.latitude,
         longitude: this.coordinates.longitude
       }).subscribe(() => {
-        this.storage.getAllMarkers().subscribe(
-          (markers: Marker[]) => {
-            this.userMarkers = markers;
-          }
-        );
+        // Updates marker data
+        this.getMarkerData();
       });
     }
   }
@@ -119,9 +135,13 @@ export class MarkerMgmtComponent implements OnInit {
    * Delete given marker data
    * @param  {object} form
    */
-  deleteMarker(form) {
-    console.log('delete', form);
-    // TODO: Delete marker
+  deleteMarker(marker: Marker) {
+    this.storage.deleteMarker(marker.id).subscribe(
+      () => {
+        // Updates marker data
+        this.getMarkerData();
+      }
+    );
   }
 
 
@@ -147,7 +167,6 @@ export class MarkerMgmtComponent implements OnInit {
    * @param  {Marker} marker
    */
   onUserMarkerClick(marker: Marker) {
-    console.log(marker);
     if (typeof marker !== 'undefined') {
       this.selectedMarker = marker;
 
