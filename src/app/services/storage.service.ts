@@ -19,23 +19,36 @@ export class StorageService {
    * @throws Will throw error if marker id is undefined
    */
   setMarker(marker: Marker) {
-    console.log('create', marker);
+    console.log(marker.action, marker);
     if (typeof marker.id !== 'undefined') {
       return this.localStorage.getItem('marker').pipe(
         mergeMap((markerData: Marker[]) => {
           if (typeof markerData === 'undefined' || markerData === null) {
             return this.localStorage.setItem('marker', [marker]);
           } else {
-            markerData.push(marker);
-            return this.localStorage.setItem('marker', markerData);
+            // Create/Update marker based on marker action
+            if (marker.action === 'create') {
+              markerData.push(marker);
+              return this.localStorage.setItem('marker', markerData);
+            } else if (marker.action === 'update') {
+              const id = markerData.findIndex(
+                (markerData) => markerData.id === marker.id
+              );
+
+              if (typeof markerData[id] !== 'undefined') {
+                markerData[id] = marker;
+                return this.localStorage.setItem('marker', markerData);
+              } else {
+                throw new Error('Sorry :( Marker is not found');
+              }
+            }
           }
         })
       );
     } else {
-      throw new Error('Marker Id is not defined');
+      throw new Error('Oops! Marker Id is not defined');
     }
   }
-
 
   /**
    * Gets the Marker data of the given marker id
