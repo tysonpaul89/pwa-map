@@ -2,10 +2,12 @@
   <mat-sidenav
     #drawer
     class="sidenav"
+    [autoFocus]="false"
     fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+    [opened]="!(isHandset$ | async)"
+    (click)="drawer.toggle()">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="">Home</a>
