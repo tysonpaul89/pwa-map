@@ -41,4 +41,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  vibrateDevice(ms: number) {
+    navigator.vibrate(ms);
+  }
+
 }

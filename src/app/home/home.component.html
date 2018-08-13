@@ -1,8 +1,44 @@
-<div class="example-container">
-  <mat-form-field>
-    <textarea matInput #message (ngModel)="message" name="message" placeholder="Notification Message"></textarea>
-  </mat-form-field>
-  <mat-dialog-actions>
-  <button mat-stroked-button (click)="sendNotification(message.value)" color="primary">Send Notification</button>
-  </mat-dialog-actions>
-</div>
+<mat-list role="list">
+  <h1 style="text-align: center;">Progressive Web App Features:</h1>
+  <mat-list-item role="listitem">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h3>Notifications</h3></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Web push notifications are notifications that can be sent to a user via desktop web and mobile web.</p>
+        <p>This means that business that don't have apps can leverage many of the benefits of push notifications even if they don’t have an app.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="example-container">
+          <mat-form-field>
+            <textarea matInput #message (ngModel)="message" name="message" placeholder="Notification Message"></textarea>
+          </mat-form-field>
+          <mat-dialog-actions>
+          <button mat-stroked-button (click)="sendNotification(message.value)" color="primary">Send Notification</button>
+          </mat-dialog-actions>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><h3>Device Features</h3></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Vibrate the device once for the duration given</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="example-container">
+              <mat-form-field>
+                  <input matInput placeholder="Vibration in milliseconds" #vibration (ngModel)="vibration" name="vibration">
+              </mat-form-field>
+              <mat-dialog-actions>
+                <button mat-stroked-button (click)="vibrateDevice(vibration.value)">Vibrate</button>&nbsp;
+              </mat-dialog-actions>
+            </div>
+        </mat-card-actions>
+      </mat-card>
+  </mat-list-item>
+</mat-list>

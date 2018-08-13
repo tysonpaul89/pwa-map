@@ -10,3 +10,7 @@
   position: sticky;
   top: 0;
 }
+
+.mat-toolbar {
+  z-index: 2;
+}
