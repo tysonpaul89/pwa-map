@@ -1,4 +1,8 @@
-<p>
-  home works!
-</p>
-<button mat-stroked-button (click)="sendNotification()" color="primary">Send Notification</button>
+<div class="example-container">
+  <mat-form-field>
+    <textarea matInput #message (ngModel)="message" name="message" placeholder="Notification Message"></textarea>
+  </mat-form-field>
+  <mat-dialog-actions>
+  <button mat-stroked-button (click)="sendNotification(message.value)" color="primary">Send Notification</button>
+  </mat-dialog-actions>
+</div>

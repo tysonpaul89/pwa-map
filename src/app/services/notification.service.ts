@@ -6,41 +6,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class NotificationService {
   url = 'https://us-central1-maps-back.cloudfunctions.net/app';
-  subscriptionId: string;
+  subscription: object;
   constructor(
     private http: HttpClient,
   ) { }
 
   saveSubscription(subscription: object) {
-    const httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type':  'application/json',
-      }),
-    };
-
-    this.http.post(
-      this.url + '/save-subscription',
-      subscription,
-      httpOptions
-    ).subscribe((res: any) => {
-      console.log(res);
-      this.subscriptionId = res.subscriptionId;
-    });
+    this.subscription = subscription;
   }
 
-  sendNotification() {
+  sendNotification(message) {
     const httpOptions = {
       headers : new HttpHeaders({
         'Content-Type':  'application/json',
       }),
     };
 
-    console.log('req body', {
-      subscriptionId: this.subscriptionId, message: 'Hello'
-    });
+    const body = {subscription: this.subscription, message};
+    console.log('req body', body);
     return this.http.post(
       this.url + '/send-notification',
-      {subscriptionId: this.subscriptionId, message: 'Hello'},
+      body,
       httpOptions
     );
   }

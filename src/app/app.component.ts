@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, isDevMode } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
 import { MatSnackBar } from '@angular/material';
 import { NotificationService } from './services/notification.service';
@@ -24,8 +24,10 @@ export class AppComponent {
       swUpdate.activateUpdate().then(() => document.location.reload());
     });
 
-    // Asking for push notification permission
-    this.subscribeToNotifications();
+    if (!isDevMode()) {
+      // Asking for push notification permission
+      this.subscribeToNotifications();
+    }
 
     // Event to show network status
     window.addEventListener('load', () => {
