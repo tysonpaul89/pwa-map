@@ -17,4 +17,12 @@ export class NavigationComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
+  toggleSidenav(drawer) {
+    this.isHandset$.subscribe((isHandset) => {
+      if (isHandset) {
+        drawer.toggle();
+      }
+    });
+  }
+
   }
