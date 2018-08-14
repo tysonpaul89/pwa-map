@@ -18,3 +18,7 @@
 mat-card {
   width: 100%;
 }
+
+#sup-def, sup {
+  color: red;
+}

@@ -1,9 +1,9 @@
 <mat-list role="list">
-  <h1 style="text-align: center;">Progressive Web App Features:</h1>
+  <h1 style="text-align: center;">What this App is capable of:</h1>
   <mat-list-item role="listitem">
     <mat-card>
       <mat-card-header>
-        <mat-card-title><h3>Notifications</h3></mat-card-title>
+        <mat-card-title><h3>Notifications API<sup>*</sup></h3></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <p>Web push notifications are notifications that can be sent to a user via desktop web and mobile web.</p>
@@ -22,23 +22,77 @@
     </mat-card>
   </mat-list-item>
   <mat-list-item role="listitem">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h3>Vibration API<sup>*</sup></h3></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Vibrate the device once for the duration given</p>
+      </mat-card-content>
+      <mat-card-actions>
+          <div class="example-container">
+            <mat-form-field>
+                <input matInput placeholder="Vibration in milliseconds" #vibration (ngModel)="vibration" name="vibration">
+            </mat-form-field>
+            <mat-dialog-actions>
+              <button mat-stroked-button (click)="vibrateDevice(vibration.value)">Vibrate</button>&nbsp;
+            </mat-dialog-actions>
+          </div>
+      </mat-card-actions>
+    </mat-card>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h3>IndexedDB<sup>*</sup></h3></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>IndexedDB is a Web API for storing large data structures within browsers and indexing them for high-performance searching.</p>
+        <p>Like an SQL-based RDBMS, IndexedDB is a transactional database system. However, it uses JavaScript objects rather than fixed columns tables to store data.</p>
+        <p><b>My Map:</b> is an app that allows users to crete their own custom markers on the google maps.</p>
+        <p>All the user made markers are <u>stored in the indexDB</u> so that user can continue creating the markers <u>even when the internet connection is not available</u></p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-stroked-button routerLink="marker-mgmt">My Map</a>&nbsp;
+      </mat-card-actions>
+    </mat-card>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h3>Media Recording API<sup>*</sup></h3></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>The Media Recording API allows authorized Web applications to access the streams from the device's audio and video capturing interfaces.</p>
+        <p><b>QR Scanner</b> is a app that allows users to read a QR code using their camera devices</p>
+        <p>Since <i>QR Scanner</i> doesn't depend on any external API's, it will work offline</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-stroked-button routerLink="qr-scanner">QR Scanner</a>&nbsp;
+      </mat-card-actions>
+    </mat-card>
+  </mat-list-item>
+  <mat-list-item role="listitem">
       <mat-card>
         <mat-card-header>
-          <mat-card-title><h3>Device Features</h3></mat-card-title>
+          <mat-card-title><h3>Geolocation API<sup>*</sup></h3></mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Vibrate the device once for the duration given</p>
+          <p>The Geolocation API lets authorized Web applications to access the location data provided by the device - obtained using either GPS or from the network environment.</p>
+          <p><b>Near by Restaurants</b> is an app that utilizes the Geolocation API to show restaurants near you location.</p>
+          <p>The restaurant data are fetched from Zomato's API and is displayed on to the maps using Google Map API</p>
+          <p><b>Note:</b></p>
+            <ul>
+              <li>This app need internet connection to get data from external sources and and will not work properly if internet is not available.</li>
+              <li>The location data depend on the network environment, so in some networks locations data will not be accurate</li>
+            </ul>
         </mat-card-content>
         <mat-card-actions>
-            <div class="example-container">
-              <mat-form-field>
-                  <input matInput placeholder="Vibration in milliseconds" #vibration (ngModel)="vibration" name="vibration">
-              </mat-form-field>
-              <mat-dialog-actions>
-                <button mat-stroked-button (click)="vibrateDevice(vibration.value)">Vibrate</button>&nbsp;
-              </mat-dialog-actions>
-            </div>
+          <a mat-stroked-button routerLink="restaurant">Near by Restaurant</a>&nbsp;
         </mat-card-actions>
       </mat-card>
-  </mat-list-item>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+        <small><b id="sup-def">*&nbsp;</b>All the features in the app is depends upon the devices OS and web browser, so some functionalities may not work in all the devices</small>
+    </mat-list-item>
 </mat-list>
