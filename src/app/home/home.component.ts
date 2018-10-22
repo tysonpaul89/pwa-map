@@ -9,7 +9,7 @@ import { NotificationService } from '../services/notification.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  isVibrationApi = 'vibrate' in navigator;
   constructor(
     private notifyService: NotificationService,
     private snackBar: MatSnackBar

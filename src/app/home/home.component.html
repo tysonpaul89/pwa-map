@@ -3,7 +3,7 @@
   <mat-list-item role="listitem">
     <mat-card>
       <mat-card-header>
-        <mat-card-title><h3>Notifications API<sup>*</sup></h3></mat-card-title>
+        <mat-card-title><h3>Notifications API<span class="sup-def">*</span></h3></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <p>Web push notifications are notifications that can be sent to a user via desktop web and mobile web.</p>
@@ -21,10 +21,10 @@
       </mat-card-actions>
     </mat-card>
   </mat-list-item>
-  <mat-list-item role="listitem">
+  <mat-list-item role="listitem" *ngIf="isVibrationApi">
     <mat-card>
       <mat-card-header>
-        <mat-card-title><h3>Vibration API<sup>*</sup></h3></mat-card-title>
+        <mat-card-title><h3>Vibration API<span class="sup-def">*</span></h3></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <p>Vibrate the device once for the duration given</p>
@@ -44,7 +44,7 @@
   <mat-list-item role="listitem">
     <mat-card>
       <mat-card-header>
-        <mat-card-title><h3>IndexedDB<sup>*</sup></h3></mat-card-title>
+        <mat-card-title><h3>IndexedDB<span class="sup-def">*</span></h3></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <p>IndexedDB is a Web API for storing large data structures within browsers and indexing them for high-performance searching.</p>
@@ -60,7 +60,7 @@
   <mat-list-item role="listitem">
     <mat-card>
       <mat-card-header>
-        <mat-card-title><h3>Media Recording API<sup>*</sup></h3></mat-card-title>
+        <mat-card-title><h3>Media Recording API<span class="sup-def">*</span></h3></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <p>The Media Recording API allows authorized Web applications to access the streams from the device's audio and video capturing interfaces.</p>
@@ -75,7 +75,7 @@
   <mat-list-item role="listitem">
       <mat-card>
         <mat-card-header>
-          <mat-card-title><h3>Geolocation API<sup>*</sup></h3></mat-card-title>
+          <mat-card-title><h3>Geolocation API<span class="sup-def">*</span></h3></mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>The Geolocation API lets authorized Web applications to access the location data provided by the device - obtained using either GPS or from the network environment.</p>
@@ -93,6 +93,6 @@
       </mat-card>
     </mat-list-item>
     <mat-list-item role="listitem">
-        <small><b id="sup-def">*&nbsp;</b>All the features in the app is depends upon the devices OS and web browser, so some functionalities may not work in all the devices</small>
+        <small><b class="sup-def">*&nbsp;</b>All the features in the app is depends upon the devices OS and web browser, so some functionalities may not work in all the devices</small>
     </mat-list-item>
 </mat-list>
